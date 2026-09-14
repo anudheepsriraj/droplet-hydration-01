@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Geriatric Fluid Intake & Micro-Sipping Calculator | Droplet Science</title>
+    <title>Daily Hydration & Micro-Sipping Calculator | Droplet</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Chart.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -21,79 +19,52 @@
                             700: '#075985',
                             900: '#0c4a6e',
                         },
-                        clinical: {
-                            teal: '#0d9488',
+                        friendly: {
+                            warm: '#fff7ed',
                             amber: '#d97706',
-                            rose: '#e11d48',
-                            slate: '#334155'
+                            rose: '#f43f5e',
+                            slate: '#334155',
+                            teal: '#0d9488'
                         }
                     }
                 }
             }
         }
     </script>
-    <style>
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 650px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 300px;
-            max-height: 360px;
-        }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 340px;
-            }
-        }
-    </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased leading-relaxed min-h-screen p-4 sm:p-6 md:p-8">
 
-<!-- Chosen Palette: Warm Professional Slate & Clinical Azure (Slate background #f8fafc, Azure Blue #0284c7, Deep Slate #0c4a6e, Teal #0d9488, Warm Amber #d97706) -->
+<!-- Chosen Palette: Warm Professional Slate & Soft Azure (Slate background #f8fafc, Azure Blue #0284c7, Deep Slate #0c4a6e, Teal #0d9488, Soft Warm Amber #d97706) -->
 
-<!-- Application Structure Plan: Standalone interactive geriatric fluid calculator widget featuring real-time daily target computation based on ESPEN/NHS benchmarks, a front-loaded diurnal schedule generator, and a dynamic kinetic absorption chart comparing micro-sipping to bolus intake. -->
+<!-- Application Structure Plan: Warm, friendly standalone calculator widget designed for home caregivers and family members. Removes all clinical/scary terminology, front-loads intake in a gentle schedule to ensure a peaceful night's sleep, and calculates personalized daily hydration goals. -->
 
 <!-- Visualization & Content Choices: 
-     - Interactive Form Inputs: Calculates custom fluid volume dynamically based on weight, gender, and fever/heat multipliers.
-     - Dynamic HTML Table: Generates time-slotted diurnal schedule (morning front-loading to prevent nocturia/falls).
-     - Micro-Sipping vs Bolus Response: Chart.js Line Chart displaying bladder pressure spikes vs serum equilibrium.
+     - Simplified Interactive Form: Uses friendly labels ("About Your Loved One", "Extra Daily Needs") rather than medical terms.
+     - Dynamic Daily Schedule Table: Replaces clinical phases with caring routine steps ("Morning Start", "Evening Wind-Down", "Restful Sleep Plan").
+     - Removed Section 3 (Medical absorption charts) per user request.
      - Confirming NO SVG / NO Mermaid JS. -->
 
 <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 
-    <div class="max-w-5xl mx-auto space-y-6">
+    <div class="max-w-4xl mx-auto space-y-6">
         
-        <!-- Top Header Card -->
-        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-brand-600 flex items-center justify-center text-white font-bold text-xl shadow-md">
-                    💧
-                </div>
-                <div>
-                    <h1 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Geriatric Fluid Target & Schedule Calculator</h1>
-                    <p class="text-xs text-slate-500">Based on ESPEN, NHS, and EFSA Clinical Hydration Guidelines</p>
-                </div>
+        <!-- Gentle Warm Introduction -->
+        <div class="bg-brand-50 rounded-2xl p-5 border border-brand-200 text-xs sm:text-sm text-brand-900 leading-relaxed shadow-sm flex items-start space-x-3">
+            <span class="text-2xl leading-none">💧</span>
+            <div>
+                <strong class="font-bold text-brand-900 block text-sm mb-0.5">Gentle Daily Hydration Made Simple</strong>
+                <span> Powered by Fivora Studio. As we grow older, feeling thirsty doesn't always happen naturally. Use this quick tool to find your loved one's ideal daily fluid goal and create an easy, comfortable micro-sipping routine for the day. Built using ESPEN, NHS, and EFSA guidelines. </span>
             </div>
-            <a href="https://shop.droplet-reminder.com" target="_blank" class="bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold px-4 py-2.5 rounded-lg transition-colors shadow-sm">
-                Explore Droplet Smart Mug &rarr;
-            </a>
-        </div>
-
-        <!-- Introductory Paragraph -->
-        <div class="bg-brand-50 rounded-xl p-4 border border-brand-200 text-xs sm:text-sm text-brand-900 leading-relaxed">
-            <strong>Clinical Context:</strong> Older adults experience blunted thirst perception (hypodipsia) and reduced kidney concentrating capacity. Forcing large volumes at once triggers bladder spasms and diuresis. Use this tool to calculate personalized daily targets and structure a steady <strong>micro-sipping protocol</strong>.
         </div>
 
         <!-- Calculator Main Section Grid -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             
-            <!-- Left Column: Inputs & Calculated Result -->
+            <!-- Left Column: Simple Inputs & Goal Result -->
             <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-5 lg:col-span-1">
                 <h2 class="font-bold text-slate-900 text-base border-b border-slate-200 pb-3 flex items-center justify-between">
-                    <span>1. Patient Inputs</span>
-                    <span class="text-xs text-brand-600 font-normal">Real-time</span>
+                    <span>1. About Your Loved One</span>
+                    <span class="text-xs text-brand-600 font-normal">Instant Goal</span>
                 </h2>
 
                 <div>
@@ -102,44 +73,44 @@
                 </div>
 
                 <div>
-                    <label class="block text-xs font-semibold text-slate-700 mb-1">Biological Gender</label>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Gender</label>
                     <select id="calc-gender" onchange="calculateFluidTarget()" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 text-sm font-semibold text-slate-800 focus:ring-2 focus:ring-brand-500 outline-none">
-                        <option value="female">Female (ESPEN Baseline: 1.6L beverage)</option>
-                        <option value="male">Male (ESPEN Baseline: 2.0L beverage)</option>
+                        <option value="female">Female</option>
+                        <option value="male">Male</option>
                     </select>
                 </div>
 
                 <div>
-                    <label class="block text-xs font-semibold text-slate-700 mb-2">Clinical & Ambient Factors</label>
+                    <label class="block text-xs font-semibold text-slate-700 mb-2">Extra Daily Needs</label>
                     <div class="space-y-2">
                         <label class="flex items-center space-x-2 text-xs text-slate-700 cursor-pointer">
                             <input type="checkbox" id="calc-fever" onchange="calculateFluidTarget()" class="rounded text-brand-600 focus:ring-brand-500 w-4 h-4">
-                            <span>Pyrexia / Fever (+500 mL)</span>
+                            <span>Feeling unwell or has a fever (+500 mL)</span>
                         </label>
                         <label class="flex items-center space-x-2 text-xs text-slate-700 cursor-pointer">
                             <input type="checkbox" id="calc-heat" onchange="calculateFluidTarget()" class="rounded text-brand-600 focus:ring-brand-500 w-4 h-4">
-                            <span>Hot Ambient Weather (+300 mL)</span>
+                            <span>Warm or hot weather (+300 mL)</span>
                         </label>
                     </div>
                 </div>
 
                 <!-- Total Result Output Box -->
                 <div class="bg-gradient-to-br from-brand-900 to-brand-700 p-5 rounded-xl text-white space-y-2 shadow-md">
-                    <div class="text-xs text-brand-200 uppercase tracking-wider font-semibold">Recommended Daily Fluid Target:</div>
+                    <div class="text-xs text-brand-200 uppercase tracking-wider font-semibold">Recommended Daily Fluid Goal:</div>
                     <div id="calc-result-total" class="text-3xl font-black tracking-tight text-white">1,950 mL</div>
-                    <div id="calc-result-sips" class="text-xs text-brand-100 font-medium">Equivalent to ~49 micro-sips of 40 mL</div>
+                    <div id="calc-result-sips" class="text-xs text-brand-100 font-medium">Equivalent to about 49 gentle sips</div>
                 </div>
             </div>
 
-            <!-- Right Column: Front-Loaded Schedule -->
+            <!-- Right Column: Easy Daily Micro-Sipping Schedule -->
             <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4 lg:col-span-2">
                 <div class="flex justify-between items-center border-b border-slate-200 pb-3">
-                    <h2 class="font-bold text-slate-900 text-base">2. Diurnal Micro-Sipping Schedule</h2>
-                    <span class="text-xs font-semibold text-slate-500 bg-slate-100 px-2 py-1 rounded">Nocturia Prevention Plan</span>
+                    <h2 class="font-bold text-slate-900 text-base">2. Daily Micro-Sipping Schedule</h2>
+                    <span class="text-xs font-semibold text-brand-700 bg-brand-50 px-2.5 py-1 rounded">Restful Sleep Plan</span>
                 </div>
 
                 <p class="text-xs text-slate-600 leading-relaxed">
-                    Fluids are front-loaded during daylight hours to maintain optimal cell hydration while tapering off in the 2–3 hours prior to sleep to prevent nighttime falls and disrupted sleep.
+                    Gently spreading drinks throughout the morning and afternoon keeps energy and hydration steady, while winding down before bedtime helps ensure a peaceful, uninterrupted night's sleep.
                 </p>
 
                 <div class="overflow-x-auto">
@@ -147,9 +118,9 @@
                         <thead class="bg-slate-100 text-slate-900 font-semibold uppercase">
                             <tr>
                                 <th class="py-2.5 px-3">Time Window</th>
-                                <th class="py-2.5 px-3">Protocol Phase</th>
-                                <th class="py-2.5 px-3">Target Volume</th>
-                                <th class="py-2.5 px-3">Micro-Sip Frequency</th>
+                                <th class="py-2.5 px-3">Daily Routine Step</th>
+                                <th class="py-2.5 px-3">Goal Amount</th>
+                                <th class="py-2.5 px-3">Easy Sip Guide</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-200" id="calc-schedule-body">
@@ -158,49 +129,29 @@
                     </table>
                 </div>
 
-                <div class="bg-amber-50 border border-amber-200 rounded-lg p-3 text-xs text-amber-900">
-                    <strong>Caregiver Tip:</strong> Set the Droplet Smart Mug timer to 20 or 40-minute intervals. The subtle blue light ring will remind the care recipient to take 1 small sip without direct verbal prompting.
-                </div>
-            </div>
-        </div>
-
-        <!-- Micro-Sipping vs Bolus Absorption Visual Chart -->
-        <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
-            <div>
-                <h2 class="font-bold text-slate-900 text-base">3. Physiological Absorption: Micro-Sipping vs. Large Bolus</h2>
-                <p class="text-xs text-slate-500 mt-1">Comparing intravesical bladder pressure spikes and rapid renal elimination between gulping large cups vs continuous micro-sipping.</p>
-            </div>
-
-            <div class="chart-container">
-                <canvas id="chartMicroVsBolus"></canvas>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs pt-2">
-                <div class="bg-rose-50 p-3 rounded-xl border border-rose-200 text-rose-800 space-y-1">
-                    <strong class="block text-rose-900">🚨 Gulping Large Volumes (250 mL Bolus):</strong>
-                    <p>Causes rapid gastric stretch and a sudden drop in blood osmolality. The brain shuts off vasopressin (ADH), resulting in immediate renal water dumping, bladder spasms, and urge incontinence.</p>
-                </div>
-                <div class="bg-teal-50 p-3 rounded-xl border border-teal-200 text-teal-800 space-y-1">
-                    <strong class="block text-teal-900">✅ Micro-Sipping (30–50 mL Small Sips):</strong>
-                    <p>Matches small intestine mucosal absorption rates. Osmolality remains steady, cellular hydration is maximized, and bladder pressure stays well below contraction thresholds.</p>
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-3.5 text-xs text-amber-900 flex items-start space-x-2">
+                    <span class="text-base leading-none">💡</span>
+                    <div>
+                        <strong>Friendly Tip for Caregivers:</strong> Small, frequent sips are much easier to enjoy than full glasses. Setting gentle reminders throughout the day keeps drinking easy and stress-free for your loved one.
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Footer Banner -->
-        <div class="bg-slate-900 text-white rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+        <div class="bg-slate-900 text-white rounded-2xl p-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left shadow-sm">
             <div>
-                <h3 class="font-bold text-sm sm:text-base">Ready to automate micro-sipping for your loved one?</h3>
-                <p class="text-xs text-slate-400 mt-1">Droplet uses smart lights and family voice reminders to ensure steady fluid intake without nagging.</p>
+                <h3 class="font-bold text-sm sm:text-base">Want to make micro-sipping effortless at home?</h3>
+                <p class="text-xs text-slate-400 mt-1">Droplet uses gentle glowing lights and warm family voice messages to encourage drinking without nagging.</p>
             </div>
-            <a href="https://shop.droplet-reminder.com" target="_blank" class="bg-brand-500 hover:bg-brand-600 text-white text-xs font-bold px-5 py-3 rounded-xl transition-colors whitespace-nowrap shadow-md">
-                Visit Droplet Store
+            <a href="https://shop.droplet-reminder.com" target="_blank" class="bg-brand-500 hover:bg-brand-600 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-colors whitespace-nowrap shadow-md">
+                Get Droplet Reminder &rarr;
             </a>
         </div>
 
     </div>
 
-    <!-- JavaScript Calculation & Chart Logic -->
+    <!-- JavaScript Calculation Logic -->
     <script>
         function calculateFluidTarget() {
             const weight = parseFloat(document.getElementById('calc-weight').value) || 65;
@@ -208,18 +159,18 @@
             const fever = document.getElementById('calc-fever').checked;
             const heat = document.getElementById('calc-heat').checked;
 
-            // ESPEN base calculation logic (30 ml/kg baseline)
+            // Warm, friendly baseline calculation
             let target = weight * 30;
             if (gender === 'male') target += 200;
             if (fever) target += 500;
             if (heat) target += 300;
 
-            // Constrain within safe clinical boundaries
+            // Constrain within safe boundaries
             target = Math.max(1200, Math.min(3200, Math.round(target)));
 
             document.getElementById('calc-result-total').innerText = `${target.toLocaleString()} mL`;
             const sips = Math.round(target / 40);
-            document.getElementById('calc-result-sips').innerText = `Equivalent to ~${sips} micro-sips of 40 mL`;
+            document.getElementById('calc-result-sips').innerText = `Equivalent to about ${sips} gentle sips`;
 
             renderSchedule(target);
         }
@@ -233,10 +184,10 @@
             const evening = Math.round(total * 0.15);
 
             const schedule = [
-                { time: "08:00 - 12:00", phase: "Morning Front-Load", vol: `${morning} mL`, sips: `${Math.round(morning/40)} sips (1 sip every 15-20 min)` },
-                { time: "12:00 - 17:00", phase: "Afternoon Maintenance", vol: `${afternoon} mL`, sips: `${Math.round(afternoon/40)} sips (1 sip every 25-30 min)` },
-                { time: "17:00 - 20:00", phase: "Evening Taper", vol: `${evening} mL`, sips: `${Math.round(evening/40)} sips (1 sip every 45 min)` },
-                { time: "20:00 - Bedtime", phase: "Nocturia Prevention", vol: "Medication sips only", sips: "Strictly limited to prevent night falls" }
+                { time: "08:00 - 12:00", phase: "Morning Start", vol: `${morning} mL`, sips: `${Math.round(morning/40)} small sips (1 sip every 15-20 min)` },
+                { time: "12:00 - 17:00", phase: "Afternoon Steady Sips", vol: `${afternoon} mL`, sips: `${Math.round(afternoon/40)} small sips (1 sip every 25-30 min)` },
+                { time: "17:00 - 20:00", phase: "Evening Wind-Down", vol: `${evening} mL`, sips: `${Math.round(evening/40)} small sips (1 sip every 45 min)` },
+                { time: "20:00 - Bedtime", phase: "Restful Night Rest", vol: "Small medication sips", sips: "Tapered off to ensure uninterrupted sleep" }
             ];
 
             tbody.innerHTML = schedule.map(s => `
@@ -249,51 +200,8 @@
             `).join('');
         }
 
-        function initChart() {
-            const ctx = document.getElementById('chartMicroVsBolus');
-            if (!ctx) return;
-
-            new Chart(ctx.getContext('2d'), {
-                type: 'line',
-                data: {
-                    labels: ['0m', '10m', '20m', '30m', '40m', '50m', '60m'],
-                    datasets: [
-                        {
-                            label: 'Bolus Intake (250 mL) - Bladder Pressure Spike',
-                            data: [10, 85, 95, 40, 20, 15, 10],
-                            borderColor: '#e11d48',
-                            borderDash: [5, 5],
-                            borderWidth: 2,
-                            tension: 0.3
-                        },
-                        {
-                            label: 'Micro-Sipping (40 mL) - Steady Plasma Absorption',
-                            data: [10, 15, 18, 20, 22, 21, 20],
-                            borderColor: '#0d9488',
-                            borderWidth: 3,
-                            tension: 0.3
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { position: 'bottom', labels: { font: { size: 11 } } }
-                    },
-                    scales: {
-                        y: { 
-                            beginAtZero: true, 
-                            title: { display: true, text: 'Intravesical Pressure / Osmotic Shift', font: { size: 10 } }
-                        }
-                    }
-                }
-            });
-        }
-
         document.addEventListener('DOMContentLoaded', () => {
             calculateFluidTarget();
-            initChart();
         });
     </script>
 </body>
