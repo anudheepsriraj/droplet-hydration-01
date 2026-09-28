@@ -36,12 +36,11 @@
 
 <!-- Chosen Palette: Warm Professional Slate & Soft Azure (Slate background #f8fafc, Azure Blue #0284c7, Deep Slate #0c4a6e, Teal #0d9488, Soft Warm Amber #d97706) -->
 
-<!-- Application Structure Plan: Warm, friendly standalone calculator widget designed for home caregivers and family members. Removes all clinical/scary terminology, front-loads intake in a gentle schedule to ensure a peaceful night's sleep, and calculates personalized daily hydration goals. -->
+<!-- Application Structure Plan: Warm, friendly standalone calculator widget designed for home caregivers and family members. Updated with gender-specific upper volume caps (2.2L max for males, 2.0L max for females) to prevent fluid overload at higher body weights, and streamlined fever input options. -->
 
 <!-- Visualization & Content Choices: 
-     - Simplified Interactive Form: Uses friendly labels ("About Your Loved One", "Extra Daily Needs") rather than medical terms.
-     - Dynamic Daily Schedule Table: Replaces clinical phases with caring routine steps ("Morning Start", "Evening Wind-Down", "Restful Sleep Plan").
-     - Removed Section 3 (Medical absorption charts) per user request.
+     - Simplified Interactive Form: Uses friendly labels ("About Your Loved One", "Extra Daily Needs") with explicit caps for safety.
+     - Dynamic Daily Schedule Table: Front-loads fluid intake to ensure a peaceful night's rest.
      - Confirming NO SVG / NO Mermaid JS. -->
 
 <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
@@ -53,7 +52,7 @@
             <span class="text-2xl leading-none">💧</span>
             <div>
                 <strong class="font-bold text-brand-900 block text-sm mb-0.5">Gentle Daily Hydration Made Simple</strong>
-                <span> Powered by Fivora Studio. As we grow older, feeling thirsty doesn't always happen naturally. Use this quick tool to find your loved one's ideal daily fluid goal and create an easy, comfortable micro-sipping routine for the day. Built using ESPEN, NHS, and EFSA guidelines. </span>
+                <span>Powered by Fivora Studio. As we grow older, feeling thirsty doesn't always happen naturally. Use this quick tool to find your loved one's ideal daily fluid goal and create an easy, comfortable micro-sipping routine for the day. Built using ESPEN, NHS, and EFSA guidelines. This is a guidance calculator. If you have a health condition concerning your kidneys or heart, it's worth checking with a GP before changing your fluid intake significantly.</span>
             </div>
         </div>
 
@@ -85,7 +84,7 @@
                     <div class="space-y-2">
                         <label class="flex items-center space-x-2 text-xs text-slate-700 cursor-pointer">
                             <input type="checkbox" id="calc-fever" onchange="calculateFluidTarget()" class="rounded text-brand-600 focus:ring-brand-500 w-4 h-4">
-                            <span>Feeling unwell or has a fever (+500 mL)</span>
+                            <span>Has a fever (+500 mL)</span>
                         </label>
                         <label class="flex items-center space-x-2 text-xs text-slate-700 cursor-pointer">
                             <input type="checkbox" id="calc-heat" onchange="calculateFluidTarget()" class="rounded text-brand-600 focus:ring-brand-500 w-4 h-4">
@@ -145,7 +144,7 @@
                 <p class="text-xs text-slate-400 mt-1">Droplet uses gentle glowing lights and warm family voice messages to encourage drinking without nagging.</p>
             </div>
             <a href="https://shop.droplet-reminder.com" target="_blank" class="bg-brand-500 hover:bg-brand-600 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-colors whitespace-nowrap shadow-md">
-                Get Droplet Reminder &rarr;
+                Explore Droplet Cups &rarr;
             </a>
         </div>
 
@@ -165,8 +164,11 @@
             if (fever) target += 500;
             if (heat) target += 300;
 
-            // Constrain within safe boundaries
-            target = Math.max(1200, Math.min(3200, Math.round(target)));
+            // Safe limits: minimum 1,200 mL, maximum 2,200 mL for men and 2,000 mL for women
+            const maxTarget = gender === 'male' ? 2200 : 2000;
+            const minTarget = 1200;
+
+            target = Math.max(minTarget, Math.min(maxTarget, Math.round(target)));
 
             document.getElementById('calc-result-total').innerText = `${target.toLocaleString()} mL`;
             const sips = Math.round(target / 40);
